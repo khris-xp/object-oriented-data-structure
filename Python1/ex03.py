@@ -1,12 +1,20 @@
 print("*** Election ***")
-election_array_round = int(input("Enter the number of voter(s): "))
-election_sum = 0
+
+election_array_round = int(input("Enter a number of voter(s) : "))
 election_array = list(map(int, input("").split()))
 
-for i in range(len(election_array) - 1):
-    if election_array[i] == election_array[i + 1]:
-        election_sum += 0
-    else:
-        election_sum += 1
+counter = {}
+max_frequency = 0
 
-print(election_sum)
+for num in election_array:
+    if num >= 1 and num <= 20:
+        counter[num] = counter.get(num, 0) + 1
+        if counter[num] > max_frequency:
+            max_frequency = counter[num]
+
+winners = [num for num, frequency in counter.items() if frequency == max_frequency]
+
+if winners:
+    print(" ".join(map(str, winners[::-1])))
+else:
+    print("*** No Candidate Wins ***")
