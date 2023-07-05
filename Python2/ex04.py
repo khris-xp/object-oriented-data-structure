@@ -1,4 +1,4 @@
-def find_base_for_21(number):
+def hbd(number):
     def convert_to_base(number, base):
         converted_number = ""
         while number > 0:
@@ -14,7 +14,7 @@ def find_base_for_21(number):
     return None
 
 year = int(input("Enter year : "))
-base, converted = find_base_for_21(year)
+base, converted = hbd(year)
 
 if base is not None:
     print(f"saimai is just {converted}, in base {base}!")
