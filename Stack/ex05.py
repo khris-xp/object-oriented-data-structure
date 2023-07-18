@@ -22,7 +22,7 @@ class Stack:
         return len(self.stack)
 
 
-inp = input("Enter max of car, car in soi, operation: ").split(" ")
+inp = input("Enter max of car,car in soi,operation : ").split(" ")
 max_car = int(inp[0])
 
 if inp[1] == "0":
@@ -46,16 +46,16 @@ for i in operation:
         elif car_added in car_in.stack:
             print("car", car_added, "already in soi")
         elif car_in.size() >= max_car:
-            print("car", car_added , "cannot arrive: Soi Full")
+            print("car", car_added , "cannot arrive : Soi Full")
         
     elif i == "depart":
         if car_in.is_empty():
-            print("car", car_added, "cannot depart: Soi Empty")
+            print("car", car_added, "cannot depart : Soi Empty")
         elif car_added not in car_in.stack:
-            print("car", car_added, "cannot depart: Don't Have Car", car_added)
+            print("car", car_added, "cannot depart : Don't Have Car", car_added)
         else:
             car_in.stack.remove(car_added)
-            print("car", car_added, "depart! : Car", car_added, "was removed")
+            print("car", car_added, "depart ! : Car", car_added, "was removed")
 
 while not car_in.is_empty():
     car_out.append(car_in.pop())
