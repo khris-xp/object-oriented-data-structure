@@ -1,65 +1,64 @@
-print("* Stack Calculator *")
+class Stack:
+    def __init__(self):
+        self.stack = []
 
-inp = input("Enter arguments : ").split(" ")
+    def size(self):
+        return len(self.stack)
+    
+    def is_empty(self):
+        return self.size() == 0
+
+    def push(self,item):
+        return self.stack.append(item)
+    
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+    
+    def peek(self):
+        return self.stack[-1]
+
+stack = Stack()        
 stack_invalid = False
-stack = []
+stack_input = input("Enter arguments : ").split(" ")
 
-def push(value):
-    stack.append(value)
-
-def pop():
-    return stack.pop() if not isEmpty() else None
-
-def size():
-    return len(stack)
-
-def isEmpty():
-    return size() == 0
-
-for i in inp:
-    if i == "+":
-        if size() >= 2:
-            push(int(pop()) + int(pop()))
-
-    elif i == "-":
-        if size() >= 2:
-            push(int(pop()) - int(pop()))
-    
-    elif i == "*":
-        if size() >= 2:
-            push(int(pop()) * int(pop()))
-    
-    elif i == "/":
-        if size() >= 2:
-            push(int(pop()) / int(pop()))
-        
-    elif i == "DUP":
-        if size() >= 1:
-            push(stack[-1])
-    
-    elif i == "POP":
-        if size() >= 1:
-            pop()
-
-    elif i == "PSH":
-        if inp.index(i) + 1 < len(inp):
-            value = inp[inp.index(i) + 1]
+for i in stack_input:
+    if i == '+':
+        if stack.size() >= 2:
+            stack.push(int(stack.pop()) + int(stack.pop()))
+    elif i == '-':
+        if stack.size() >= 2:
+            stack.push(int(stack.pop()) - int(stack.pop()))
+    elif i == '*':
+        if stack.size() >= 2:
+            stack.push(int(stack.pop()) * int(stack.pop()))
+    elif i == '/':
+        if stack.size() >= 2:
+            stack.push(int(stack.pop()) / int(stack.pop()))
+    elif i == 'DUP':
+        if stack.size() >= 1:
+            stack.push(stack.stack[-1])
+    elif i == 'POP':
+        if stack.size() >= 1:
+            stack.pop()
+    elif i == 'PSH':
+        if stack_input.index[i] + 1 < len(stack_input):
+            value = stack_input[stack_input.index(i) + 1]
             if value.isnumeric():
-                push(int(value))
+                stack.push(int(value))
             else:
-                push(value)
-
+                stack.push(value)
     else:
         if i.isnumeric():
-            push(int(i))
+            stack.push(i)
         else:
             print("Invalid instruction: " + i)
             stack_invalid = True
             break
 
-if size() == 1:
-    print(round(stack[0]))
-elif size() > 1:
+if stack.size() == 1:
+    print(round(int(stack.stack[0])))
+elif stack.size() > 1:
     print(stack.pop())
-elif size() == 0 and not stack_invalid:
+elif stack.size() == 0 and not stack_invalid:
     print(0)
