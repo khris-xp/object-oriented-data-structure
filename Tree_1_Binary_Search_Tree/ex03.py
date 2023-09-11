@@ -3,79 +3,51 @@ class Node:
         self.data = data
         self.left = None
         self.right = None
-    
-    def __str__(self):
-        return str(self.data)
 
-    def getLeft(self):
-        return self.left
-    
-    def getRight(self):
-        return self.right
-    
 class BinarySearchTree:
     def __init__(self):
         self.root = None
 
     def insert(self, data):
-        if self.root == None:
-            self.root = Node(data)
-        else:
-            self.insertNode(self.root, data)
+        self.root = self._insert(self.root, data)
 
-    def insertNode(self, node, data):
-        if data <= node.data:
-            if node.left == None:
-                node.left = Node(data)
-            else:
-                self.insertNode(node.left, data)
+    def _insert(self, root, data):
+        if root is None:
+            return Node(data)
+        if data <= root.data:
+            root.left = self._insert(root.left, data)
         else:
-            if node.right == None:
-                node.right = Node(data)
-            else:
-                self.insertNode(node.right, data)
+            root.right = self._insert(root.right, data)
+        return root
 
     def printFormatTree(self):
-        BinarySearchTree._printFormatTree(self.root,0)
+        self._printFormatTree(self.root, 0)
         print("--------------------------------------------------")
-    
-    def _printFormatTree(root,depth):
+
+    def _printFormatTree(self, root, depth):
         if root is not None:
-            BinarySearchTree._printFormatTree(root.getRight(),depth + 1)
-            print(" " + "     " * depth + str(root.data))    
-            BinarySearchTree._printFormatTree(root.getLeft(),depth + 1)
+            self._printFormatTree(root.right, depth + 1)
+            print(" " + "     " * depth + str(root.data))
+            self._printFormatTree(root.left, depth + 1)
 
-    def find_below(self,target):
-        cnt = BinarySearchTree._find_below(self.root,target)
-        return cnt
-        
+    def find_below(self, target):
+        return self._find_below(self.root, target)
 
-    def _find_below(root,target):
-        if root is not None and root.getLeft() is None and root.getRight() is None:
-            if root.data <= target:
-                return 1
-            else:
-                return 0
-            
-        elif root is not None:
-            if root.data > target:
-                return BinarySearchTree._find_below(root.getLeft(),target)
-            else:
-                cnt1 = BinarySearchTree._find_below(root.getLeft(),target)
-                cnt2 = BinarySearchTree._find_below(root.getRight(),target)
-                return 1 + cnt1 + cnt2
-        else:
+    def _find_below(self, root, target):
+        if root is None:
             return 0
-        
-inp = input("Enter Input : ").split("/")
+        if root.data <= target:
+            cnt = 1
+        else:
+            cnt = 0
+        cnt += self._find_below(root.left, target) + self._find_below(root.right, target)
+        return cnt
 
-data = inp[0].split()
+inp = input("Enter Input : ").split("/")
+data = list(map(int, inp[0].split()))
 target = int(inp[1])
 
 tree = BinarySearchTree()
-data = [int(num) for num in data]
-
-
 for d in data:
     tree.insert(d)
 
