@@ -11,9 +11,6 @@ class BST:
     def __init__(self):
         self.root = None
 
-    def insert(self, data):
-        self.root = self._insert(self.root, data)
-
     def insert(self, key):
         node = Node(key)
         if (self.root == None):
