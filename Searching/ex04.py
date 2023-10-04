@@ -1,36 +1,30 @@
-# Python program to check if two strings are isomorphic
-MAX_CHARS = 256
-
-def areIsomorhic(string1, string2):
-    m = len(string1)
-    n = len(string2)
-
-    if m != n:
+def are_isomorphic(string1, string2):
+    if len(string1) != len(string2):
         return False
 
-    marked = [False] * MAX_CHARS
+    char_map = {}
+    seen_chars = set()
 
-    map = [-1] * MAX_CHARS
-
-    for i in range(n):
-        if map[ord(string1[i])] == -1:
-            if marked[ord(string2[i])] == True:
+    for char1, char2 in zip(string1, string2):
+        if char1 not in char_map:
+            if char2 in seen_chars:
                 return False
-
-            marked[ord(string2[i])] = True
-
-            map[ord(string1[i])] = string2[i]
-
-        elif map[ord(string1[i])] != string2[i]:
+            char_map[char1] = char2
+            seen_chars.add(char2)
+        elif char_map[char1] != char2:
             return False
 
     return True
 
-string_input = input("Enter str1,str2: ").split(',')
-string1 = string_input[0]
-string2 = string_input[1]
+def main():
+    string_input = input("Enter str1, str2: ").split(',')
+    string1 = string_input[0].strip()
+    string2 = string_input[1].strip()
 
-if areIsomorhic(string1, string2):
-    print(string1, "and", string2, "are Isomorphic")
-else:
-    print(string1, "and", string2, "are not Isomorphic")
+    if are_isomorphic(string1, string2):
+        print(f"{string1} and {string2} are Isomorphic")
+    else:
+        print(f"{string1} and {string2} are not Isomorphic")
+
+if __name__ == "__main__":
+    main()
