@@ -15,7 +15,7 @@ def binary_search(list_input, low, high, x):
         return -1
     
 data = [ 2, 3, 4, 10, 40 ]
-x = 2
+x = 10
  
 result = binary_search(data, 0, len(data)-1, x)
  
