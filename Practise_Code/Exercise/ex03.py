@@ -13,8 +13,6 @@ def insertion_sort(list_input):
         
         list_input[j + 1] = min_index
 
-insertion_sort(input_list)
-
 def binary_search(list_input, low, high, find_index):
     if high >= low:
         mid = (high + low) // 2
@@ -28,6 +26,8 @@ def binary_search(list_input, low, high, find_index):
         
     else:
         return "Not Found"
+    
+insertion_sort(input_list)
 print(input_list)
 result = binary_search(input_list, 0, len(input_list)-1, find_index)
  
